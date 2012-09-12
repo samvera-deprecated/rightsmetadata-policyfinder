@@ -2,16 +2,18 @@ package org.projecthydra.xacml.finder;
 
 import java.io.InputStream;
 import java.io.OutputStream;
-
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
 import javax.xml.xpath.XPathException;
+
+import org.fcrepo.common.Constants;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.sun.xacml.AbstractPolicy;
 import com.sun.xacml.EvaluationCtx;
@@ -24,12 +26,6 @@ import com.sun.xacml.cond.EvaluationResult;
 import com.sun.xacml.ctx.Result;
 import com.sun.xacml.ctx.Status;
 import com.sun.xacml.ctx.Subject;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import org.fcrepo.common.Constants;
-import org.fcrepo.common.policy.ObjectNamespace;
 
 public class RightsMetadataPolicy
 extends AbstractPolicy {

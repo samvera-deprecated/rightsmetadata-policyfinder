@@ -19,6 +19,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <fcrepo.version>3.6.1</fcrepo.version>
     <slf4j.version>1.6.6</slf4j.version>
     <github.global.server>github</github.global.server>
   </properties>
@@ -30,6 +31,24 @@
         <artifactId>sunxacml</artifactId>
         <version>1.2</version>
         <classifier>melcoe</classifier>
+      </dependency>
+      <dependency>
+        <groupId>org.fcrepo</groupId>
+        <artifactId>fcrepo-common</artifactId>
+        <version>${fcrepo.version}</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.fcrepo</groupId>
+        <artifactId>fcrepo-security-pdp</artifactId>
+        <version>${fcrepo.version}</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.fcrepo</groupId>
+        <artifactId>fcrepo-server</artifactId>
+        <version>${fcrepo.version}</version>
+        <scope>provided</scope>
       </dependency>
       <dependency>
         <groupId>org.slf4j</groupId>
@@ -52,6 +71,18 @@
       <classifier>melcoe</classifier>
     </dependency>
     <dependency>
+      <groupId>org.fcrepo</groupId>
+      <artifactId>fcrepo-common</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.fcrepo</groupId>
+      <artifactId>fcrepo-security-pdp</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.fcrepo</groupId>
+      <artifactId>fcrepo-server</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
     </dependency>
@@ -64,7 +95,7 @@
   <licenses>
     <license>
       <name>The Apache Software License, Version 2.0</name>
-    <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
       <comments>Copyright (c) 2012 Project Hydra</comments>
     </license>
   </licenses>
@@ -103,7 +134,7 @@
   </scm>
 
   <prerequisites>
-    <maven>2.2.1</maven>
+    <maven>3.0.0</maven>
   </prerequisites>
 
   <mailingLists>
@@ -148,14 +179,6 @@
           </configuration>
         </plugin>
         <plugin>
-          <artifactId>maven-assembly-plugin</artifactId>
-          <version>2.3</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-clean-plugin</artifactId>
-          <version>2.5</version>
-        </plugin>
-        <plugin>
           <artifactId>maven-compiler-plugin</artifactId>
           <version>2.5.1</version>
           <configuration>
@@ -163,10 +186,6 @@
             <source>1.6</source>
             <target>1.6</target>
           </configuration>
-        </plugin>
-        <plugin>
-          <artifactId>maven-deploy-plugin</artifactId>
-          <version>2.7</version>
         </plugin>
         <plugin>
           <artifactId>maven-enforcer-plugin</artifactId>
@@ -215,24 +234,8 @@
           </executions>
         </plugin>
         <plugin>
-          <artifactId>maven-install-plugin</artifactId>
-          <version>2.3.1</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-jar-plugin</artifactId>
-          <version>2.4</version>
-        </plugin>
-        <plugin>
           <artifactId>maven-release-plugin</artifactId>
           <version>2.3.2</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-resources-plugin</artifactId>
-          <version>2.5</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-shade-plugin</artifactId>
-          <version>1.7.1</version>
         </plugin>
         <plugin>
           <artifactId>maven-site-plugin</artifactId>
@@ -334,44 +337,6 @@
             <goals>
               <goal>check</goal>
             </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <artifactId>maven-shade-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>jug-dependency</id>
-            <phase>package</phase>
-            <goals>
-              <goal>shade</goal>
-            </goals>
-            <configuration>
-              <artifactSet>
-                <includes>
-                  <include>com.fasterxml.uuid:java-uuid-generator</include>
-                </includes>
-              </artifactSet>
-              <shadedArtifactAttached>true</shadedArtifactAttached>
-              <shadedClassifierName>with-jug-dependency</shadedClassifierName>
-            </configuration>
-          </execution>
-          <execution>
-            <id>all-dependencies</id>
-            <phase>package</phase>
-            <goals>
-              <goal>shade</goal>
-            </goals>
-            <configuration>
-              <artifactSet>
-                <excludes>
-                  <exclude>junit:junit</exclude>
-                  <exclude>org.apache.maven:lib:tests</exclude>
-                </excludes>
-              </artifactSet>
-              <shadedArtifactAttached>true</shadedArtifactAttached>
-              <shadedClassifierName>with-all-dependencies</shadedClassifierName>
-            </configuration>
           </execution>
         </executions>
       </plugin>
@@ -487,6 +452,7 @@
     </profile>
   </profiles>
   <repositories>
+    <!-- For the sunxacml dependency -->
     <repository>
       <id>duraspace-thirdparty</id>
       <name>Duraspace Thirdparty Maven Repository</name>
